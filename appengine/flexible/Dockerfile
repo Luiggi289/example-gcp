@@ -1,9 +1,7 @@
 # [START dockerfile]
 FROM tiangolo/uvicorn-gunicorn:python3.9-slim
 
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+WORKDIR /app
 
 COPY requirements.txt .
 

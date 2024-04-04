@@ -25,7 +25,7 @@ def prdecit(p_powerhorse):
     prediction = dnn_model.predict(new_data_tensor)
     
 
-    return jsonify( { "cant_cilindros" : float(prediction[0,0]) })
+    return jsonify( { "cilindros" : float(prediction[0,0]) })
 
 
 # [END example]
