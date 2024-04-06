@@ -16,9 +16,10 @@ runtime: custom
 env: flex
 service: service-flex-v2
 automatic_scaling:
-  min_num_instances: 1
+  min_num_instances: 1 
   max_num_instances: 5
-  cool_down_period_sec: 180
-  cpu_utilization:
-    target_utilization: 0.6
-  target_concurrent_requests: 100
+  cool_down_period_sec: 60
+
+## Escala manual
+#manual_scaling:
+#  instances: 5
