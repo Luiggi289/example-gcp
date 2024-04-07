@@ -1,7 +1,7 @@
 
 # Configuraciones
 runtime: python39
-service: card
+service: front-card
 instance_class: B2
 
 # [START handlers]
@@ -17,7 +17,7 @@ basic_scaling:
   idle_timeout: 1m
 
 env_variables:
-  SERVER_URL: "example-gcs-bucket"  
+  SERVER_URL: "https://service-card-irmon4e4ya-uc.a.run.app"  
 
 # Entorno Estandar - Escala Manual 
 
