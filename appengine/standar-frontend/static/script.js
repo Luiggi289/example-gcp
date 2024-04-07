@@ -1,12 +1,27 @@
+
 document.getElementById('myForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que el formulario se envíe de manera tradicional
     
+    const serverUrl = this.dataset.serverUrl;
     const formData = new FormData(this); // Crea un objeto FormData con los datos del formulario
-    
+
+     // Convertir FormData a un objeto JavaScript
+     const jsonData = {};
+     formData.forEach((value, key) => {
+         jsonData[key] = value;
+     });
+ 
+     // Convertir el objeto JavaScript a formato JSON
+     const jsonString = JSON.stringify(jsonData);
+
+
     // Realiza una solicitud POST utilizando Fetch
-    fetch('{{ url_for("submitted_form") }}', {
+    fetch(serverUrl + '/card', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json' // Establecer el Content-Type a application/json
+        },
+        body: jsonString
     })
     .then(response => {
         if (!response.ok) {
@@ -17,6 +32,8 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
     .then(data => {
         console.log('Datos recibidos:', data);
         // Aquí puedes manejar la respuesta de la API
+        alert("Success");
+        location.reload();
     })
     .catch(error => {
         console.error('Error en la solicitud:', error);

@@ -7,13 +7,15 @@
 </head>
 <body>
 <h3>Registro de entrega de tarjeta</h3>
-<form id="myForm">
+<form id="myForm" data-server-url="{{ server_url }}">
     <label for="name">Name:</label>
     <input type="text" name="name"><br />
     <label for="document">Document:</label>
     <input type="text" name="document"><br />
     <label for="email">Email address:</label>
     <input type="email" name="email"><br />
+    <label for="card">Card:</label>
+    <input type="text" name="card"><br />
     <label for="comments">Comments:</label>
     <textarea name="comments"></textarea><br />
     <input type="submit" value="Submit">
