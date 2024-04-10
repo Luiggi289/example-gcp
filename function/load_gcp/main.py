@@ -1,22 +1,43 @@
 import pandas as pd
-from google.cloud import bigquery
+import google.cloud.bigquery as bigquery
+import google.cloud.storage as storage
 import functions_framework
 
-
 @functions_framework.http
-def load(request):
+def load_tipo_cambio(request):
+
+    request_json = request.get_json(silent=True)
+    load_type=''
+    print('--------request : ',request_json)
+
+    if request_json and 'load_type' in request_json:
+        load_type = request_json['load_type']
+
+    if load_type=='bigquery' :
+        return load_tipo_cambio_bq()
+    elif  load_type=='storage' :
+        return load_tipo_cambio_st()
+    else :
+        return "no existe el tipo de carga"
+
+    return "tipo de carga invalido : "+ load_type    
+
+def load_tipo_cambio_bq():
+
+
+
     headers_files = {
     'tipocambio':["fecha","compra","venta","nn"]
     }
+
     dwn_url_tipcambio='https://www.sunat.gob.pe/a/txt/tipoCambio.txt'
     tipcambio_df = pd.read_csv(dwn_url_tipcambio, names=headers_files['tipocambio'], sep='|')
-
 
     tipcambio_df = tipcambio_df.drop(columns=['nn'])
 
     client = bigquery.Client()
-
     table_id =  "premium-guide-410714.dep_raw.exchange_rate_v2"
+
     job_config = bigquery.LoadJobConfig(
         schema=[
             bigquery.SchemaField("fecha", bigquery.enums.SqlTypeNames.STRING),
@@ -33,8 +54,27 @@ def load(request):
     job.result()  # Wait for the job to complete.
 
     table = client.get_table(table_id)  # Make an API request.
-    print(
-        "Loaded {} rows and {} columns to {}".format(
+
+
+        
+    return "Loaded {} rows and {} columns to {}".format(
             table.num_rows, len(table.schema), table_id
         )
-    )
+
+def load_tipo_cambio_st():
+    
+    headers_files = {
+    'tipocambio':["fecha","compra","venta","nn"]
+    }
+
+    dwn_url_tipcambio='https://www.sunat.gob.pe/a/txt/tipoCambio.txt'
+    tipcambio_df = pd.read_csv(dwn_url_tipcambio, names=headers_files['tipocambio'], sep='|')
+
+    tipcambio_df = tipcambio_df.drop(columns=['nn'])
+
+    client = storage.Client()
+    bucket = client.bucket('test-nh')
+    blob = bucket.blob('tipo_cambio.csv')
+    blob.upload_from_string(tipcambio_df.to_csv(index=False), content_type='text/csv')
+    return 'Tipo de cambio uploaded'
+
