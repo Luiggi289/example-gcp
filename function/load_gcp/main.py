@@ -22,8 +22,6 @@ def load_tipo_cambio(request):
         return load_tipo_cambio_bq(target)
     elif  load_type=='storage' :
         return load_tipo_cambio_st(target)
-    else :
-        return "no existe el tipo de carga"+ load_type
 
     return "tipo de carga invalido : "+ load_type    
 

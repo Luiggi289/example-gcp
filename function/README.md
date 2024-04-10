@@ -19,13 +19,25 @@ gcloud functions deploy prd-load_tipo_cambio \
 --entry-point=load_tipo_cambio \
 --trigger-http
 
-### Ejecutar el siguiente comando para ejecutar la cloud function 
+### Ejecutar el siguiente comando para ejecutar la cloud function para cargar a Cloud storage 
+### Antes cambiar la variable target
 
 curl -m 70 -X POST https://us-central1-premium-guide-410714.cloudfunctions.net/prd-load_tipo_cambio \
 -H "Authorization: bearer $(gcloud auth print-identity-token)" \
 -H "Content-Type: application/json" \
 -d '{
   "load_type": "storage",
-  target:"gs://test-nh/tipo_cambio.csv"
+ "target":"gs://test-nh/tipo_cambio.csv"
 }'
 
+
+### Ejecutar el siguiente comando para ejecutar la cloud function para cargar a Bigquery 
+### Antes cambiar la variable target
+
+curl -m 70 -X POST https://us-central1-premium-guide-410714.cloudfunctions.net/prd-load_tipo_cambio \
+-H "Authorization: bearer $(gcloud auth print-identity-token)" \
+-H "Content-Type: application/json" \
+-d '{
+  "load_type": "bigquery",
+ "target":"premium-guide-410714.dep_raw.exchange_rate_v2"
+}'
