@@ -1,7 +1,7 @@
 
 # Configuraciones
 runtime: python39
-service: front-card
+service: prd-front-card
 instance_class: B2
 
 # [START handlers]

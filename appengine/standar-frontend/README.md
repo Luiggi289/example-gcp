@@ -14,7 +14,7 @@ git clone https://github.com/Luiggi289/example-gcp.git
 
 # 5.-Ejecutar el siguiente comando
 
-cd example-gcp/function
+cd example-gcp/appengine/standar-frontend
 
 # 6.- Ejecutar el siguiente comando reemplazando la variable:
 
