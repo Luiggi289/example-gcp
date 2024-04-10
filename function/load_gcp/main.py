@@ -8,6 +8,11 @@ def load_tipo_cambio(request):
 
     request_json = request.get_json(silent=True)
     load_type=''
+    target='' 
+
+    if request_json and 'target' in request_json:
+        target = request_json['target']
+
     print('--------request : ',request_json)
 
     if request_json and 'load_type' in request_json:
@@ -22,7 +27,7 @@ def load_tipo_cambio(request):
 
     return "tipo de carga invalido : "+ load_type    
 
-def load_tipo_cambio_bq():
+def load_tipo_cambio_bq(target):
 
 
 
@@ -36,7 +41,7 @@ def load_tipo_cambio_bq():
     tipcambio_df = tipcambio_df.drop(columns=['nn'])
 
     client = bigquery.Client()
-    table_id =  "premium-guide-410714.dep_raw.exchange_rate_v2"
+    table_id =  target
 
     job_config = bigquery.LoadJobConfig(
         schema=[
@@ -61,7 +66,7 @@ def load_tipo_cambio_bq():
             table.num_rows, len(table.schema), table_id
         )
 
-def load_tipo_cambio_st():
+def load_tipo_cambio_st(target):
     
     headers_files = {
     'tipocambio':["fecha","compra","venta","nn"]
@@ -73,8 +78,9 @@ def load_tipo_cambio_st():
     tipcambio_df = tipcambio_df.drop(columns=['nn'])
 
     client = storage.Client()
-    bucket = client.bucket('test-nh')
-    blob = bucket.blob('tipo_cambio.csv')
+    bucket = client.bucket(target.split('/')[2])
+    file="/".join(target.split("/")[3:])
+    blob = bucket.blob(file)
     blob.upload_from_string(tipcambio_df.to_csv(index=False), content_type='text/csv')
     return 'Tipo de cambio uploaded'
 
