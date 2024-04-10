@@ -21,7 +21,7 @@ gcloud functions deploy prd-load_tipo_cambio \
 
 ### Ejecutar el siguiente comando para ejecutar la cloud function 
 
-curl -m 70 -X POST https://us-central1-premium-guide-410714.cloudfunctions.net/function-2 \
+curl -m 70 -X POST https://us-central1-premium-guide-410714.cloudfunctions.net/prd-load_tipo_cambio \
 -H "Authorization: bearer $(gcloud auth print-identity-token)" \
 -H "Content-Type: application/json" \
 -d '{

@@ -13,7 +13,7 @@ def load_tipo_cambio(request):
     if request_json and 'target' in request_json:
         target = request_json['target']
 
-    print('--------request : ',request_json)
+    print('--------request : ')
 
     if request_json and 'load_type' in request_json:
         load_type = request_json['load_type']
