@@ -5,7 +5,7 @@ import pytz
 import os
 from flask_cors import CORS
 
-PROJECT_ID= 'tensile-impact-412116'
+
 URL_FRONTEND = os.environ.get('URL_FRONTEND')
 
 if URL_FRONTEND is None :
@@ -20,7 +20,7 @@ CORS(app, origins=URL_FRONTEND)
 
 @app.route("/")
 def hello():
-    return "Hola Mundo GCP!!"
+    return "Hola Mundo GCP 2!!"
 
 
 @app.route('/card',methods=['POST'])
@@ -32,7 +32,7 @@ def create_delivered():
     fecha_actual_peru = datetime.now(zona_horaria_peru)
 
     # Conexión a Firestore
-    db = firestore.Client(project=PROJECT_ID)
+    db = firestore.Client()
 
     # Referencia a la colección donde deseas guardar los datos
     coleccion = db.collection('card')
