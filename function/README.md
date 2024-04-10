@@ -29,4 +29,3 @@ curl -m 70 -X POST https://us-central1-premium-guide-410714.cloudfunctions.net/f
   target:"gs://test-nh/tipo_cambio.csv"
 }'
 
-premium-guide-410714.dep_raw.exchange_rate_v2

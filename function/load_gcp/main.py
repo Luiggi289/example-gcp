@@ -19,9 +19,9 @@ def load_tipo_cambio(request):
         load_type = request_json['load_type']
 
     if load_type=='bigquery' :
-        return load_tipo_cambio_bq()
+        return load_tipo_cambio_bq(target)
     elif  load_type=='storage' :
-        return load_tipo_cambio_st()
+        return load_tipo_cambio_st(target)
     else :
         return "no existe el tipo de carga"
 
