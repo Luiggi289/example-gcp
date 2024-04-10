@@ -1,4 +1,3 @@
-import tensorflow as tf
 from flask import Flask , jsonify
 
 
@@ -9,24 +8,6 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return "Hola Mundo"
-
-@app.route('/predict/income/<int:p_income>',methods=['GET'])
-def prdecit(p_income):
-# Cargar el modelo de la red neuronal
-    dnn_model = tf.keras.models.load_model("modelo.keras")
-
-    # Datos de entrada 
-    new_data = [[p_income]]  
-
-    # Convertir los datos de entrada a tensores de TensorFlow
-    new_data_tensor = tf.constant(new_data, dtype=tf.float32)
-
-    # Realizar la predicción utilizando el modelo de la red neuronal
-    prediction = dnn_model.predict(new_data_tensor)
-    
-
-    return jsonify( { "purchase" : float(prediction[0,0]) })
-
 
 # [END example]
 
