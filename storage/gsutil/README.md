@@ -2,7 +2,7 @@
 
 ##### Ejecutar los siguientes comandos 
 
-git clone https://github.com/Luiggi289/example-gcp.git 
+git clone https://github.com/Luiggi289/example-gcp.git  <br />
 cd example-gcp/storage/gsutil
 
 ##### Ejecutar el siguiente comando para windows:
