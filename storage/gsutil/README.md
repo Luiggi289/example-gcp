@@ -13,6 +13,9 @@ cd example-gcp/storage/gsutil
 
 sh load_storage.sh
 
+##### Documentación de comandos :
+##### https://cloud.google.com/storage/docs/gsutil/commands/help
+
 #### Ejecutar procesos con cuenta de servicio
 
 ##### Crear cuenta de servicio con el siguiente comando
