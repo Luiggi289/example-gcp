@@ -21,6 +21,5 @@ gcloud iam service-accounts create prd-process-data-onpremise
 
 ##### 
 
-gcloud iam service-accounts keys create prd-process-data-onpremise.json \
---iam-account=prd-process-data-onpremise@premium-guide-410714.iam.gserviceaccount.com
+gcloud iam service-accounts keys create prd-process-data-onpremise.json --iam-account=prd-process-data-onpremise@premium-guide-410714.iam.gserviceaccount.com
 
