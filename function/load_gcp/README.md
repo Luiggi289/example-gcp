@@ -17,7 +17,8 @@ gcloud functions deploy prd-load_tipo_cambio \
 --region=us-central1 \
 --source=. \
 --entry-point=load_tipo_cambio \
---trigger-http
+--trigger-http \
+--no-allow-unauthenticated
 
 ### Ejecutar el siguiente comando para ejecutar la cloud function para cargar a Cloud storage 
 ### Antes cambiar la variable target
