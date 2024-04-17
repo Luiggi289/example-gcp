@@ -45,6 +45,17 @@ insert into customer (id,name,gender) values (2,'Maria del Rio','F');
 select * from customer;
 
 ### 4 Integrar con Cloud Storage
-#### Clonar el repositorio
+#### 4.1 Clonar el repositorio
 git clone https://github.com/Luiggi289/example-gcp.git  
 cd example-gcp/sql/demo
+
+#### 4.2. para agregar la IP que va a leer la base de datos 
+####      tenemos que agregarlo a Cloud SQL, identificar 
+####      tu ip en la siguiente página :
+
+https://whatismyipaddress.com/es/mi-ip
+
+
+#### 4.3. Editar la instancia 
+#### 4.4 Ir a la sección Conexiones y agregar tu IP.
+#### 4.5 Dar clic en Guardar 
