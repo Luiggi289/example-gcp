@@ -91,10 +91,12 @@ gcloud spanner instances update test-bd-spanner-2 --nodes=1
 
 
 
-#### Integrar datos de Cloud Spanner
+#### 6 Integrar datos de Cloud Spanner
 
 gcloud services enable spanner.googleapis.com
 
-
+#### Clonar el repositorio
+git clone https://github.com/Luiggi289/example-gcp.git  
+cd example-gcp/sql/demo
 
 

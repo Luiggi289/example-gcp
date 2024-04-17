@@ -22,9 +22,19 @@
 ####      "bd-sql-1"
 #### 2.4. Dar clic en el botón "CREAR"
 
+
+### 3 Ejecutar script's SQL
+
+#### 3.1 Habilitar la API de cloud SQL
 gcloud services enable sqladmin.googleapis.com
 
+#### 3.2 Ir el Menu de "INSTANCIA PRINCIPAL"
+#### 3.3 Seleccionar la opción  "Descripción general"
+#### 3.4 Buscar el botón "ABRIR CLOUD SHELL"
+#### 3.5 Se abrirá el terminal de cloud shell con el comando de conexión 
+####     donde pedirá la clave .
 
+#### 3.6 Ejecutar las siguientes sentencias SQL : 
 use bd-sql-1
 
 create table customer (id int , name varchar(100) , gender char(1));
@@ -34,3 +44,7 @@ insert into customer (id,name,gender) values (2,'Maria del Rio','F');
 
 select * from customer;
 
+### 4 Integrar con Cloud Storage
+#### Clonar el repositorio
+git clone https://github.com/Luiggi289/example-gcp.git  
+cd example-gcp/sql/demo
