@@ -6,13 +6,14 @@ git clone https://github.com/Luiggi289/example-gcp.git
 cd example-gcp/bigquery/integracion
 
 
-##### Ejecutar el siguiente comando :
+##### Ejecutar el siguiente comando para subir un archivo a GCS:
 
 gsutil cp data/master/product.csv gs://test-nh/data/master/product.csv
 
-bq load --skip_leading_rows=1 \ ​
+##### Ejecutar el siguiente comando para cargar una tabla con un archivo de GCS:
+bq load --skip_leading_rows=1 \
 --field_delimiter=',' \
---source_format=CSV \ ​
-premium-guide-410714.dep_raw.product \ ​
-gs://test-nh/data/master/product.csv \ ​
-'id:INTEGER,Product:STRING,prices_STRING,stock:STRING,color:STRING'
+--source_format=CSV \
+dep_raw.product \
+gs://test-nh/data/master/product.csv \
+'id:INTEGER,Product:STRING,prices:STRING,stock:STRING,color:STRING'
