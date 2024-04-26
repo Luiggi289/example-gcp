@@ -27,6 +27,8 @@ print(words.columns)
 
 word_count = spark.sql('SELECT word, SUM(word_count) AS word_count FROM words GROUP BY word')
 
-word_count.write.format('bigquery') \
-  .option('table', 'wordcount_dataset.wordcount_output') \
-  .save()
+
+word_count.write \
+  .format("bigquery") \
+  .option("writeMethod", "direct") \
+  .save("wordcount_dataset.wordcount_output")
