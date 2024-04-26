@@ -2,6 +2,7 @@
 
 """BigQuery I/O PySpark example."""
 
+from pyspark.sql import SparkSession
 
 spark = SparkSession \
   .builder \
