@@ -1,6 +1,7 @@
 
-### Dataproc
+## Dataproc
 
+### 1. Mi primer programa en Dataproc
 
 #### Copiar el repositorio 
 ```
@@ -50,7 +51,9 @@ gs://$DEVSHELL_PROJECT_ID-dataproc-dev/main.py \
 --region=us-central1 
 ```
 
-### Leer y cargar a Bigquery : 
+
+### 2. Integración con Bigquery
+
 
 #### Crear el dataset donde se van a crear mi tabla destino
 ```
