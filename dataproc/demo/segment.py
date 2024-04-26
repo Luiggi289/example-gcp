@@ -21,6 +21,7 @@ spark.conf.set('temporaryGcsBucket', bucket)
 words = spark.read.format('bigquery') \
   .option('table', 'bigquery-public-data:samples.shakespeare') \
   .load()
+words.createOrReplaceTempView('words')
 
 print(words.columns)
 
