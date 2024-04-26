@@ -3,9 +3,13 @@
 
 
 #### Copiar el repositorio 
+```
+
 git clone https://github.com/Luiggi289/example-gcp.git  
 cd example-gcp/dataproc/demo
 
+
+```
 #### Ejecutar el comando :
 
 gcloud services enable dataproc.googleapis.com
@@ -36,18 +40,24 @@ gsutil storage cp main.py gs://$DEVSHELL_PROJECT_ID-dataproc-dev
 
 #### Crear un Job y ejecutarlo
 
+```
+
 gcloud dataproc jobs submit pyspark \
 gs://$DEVSHELL_PROJECT_ID-dataproc-dev/main.py \
 --cluster=cluster01 \
 --region=us-central1 
 
+```
 
 ### Leer y cargar a Bigquery : 
 
 #### Crear el dataset donde se van a crear mi tabla destino
+```
 
 CREATE SCHEMA IF NOT EXISTS `premium-guide-410714.datamart_ventas` 
   OPTIONS (    location = 'US'); 
+
+```
 
 #### Crear la siguiente tabla que será la fuente para el proceso en spark
 
@@ -90,5 +100,11 @@ gs://$DEVSHELL_PROJECT_ID-dataproc-dev/segment.py \
 --cluster=cluster01 \
 --region=us-central1 \
 --jars=gs://$DEVSHELL_PROJECT_ID-dataproc-dev/spark-3.1-bigquery-0.37.0.jar
+
+
+
+#### Eliminar el cluster
+gcloud dataproc clusters delete cluster01 --region=us-central1
+
 
 
