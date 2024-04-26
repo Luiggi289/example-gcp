@@ -29,6 +29,6 @@ word_count = spark.sql('SELECT word, SUM(word_count) AS word_count FROM words GR
 
 
 word_count.write \
-  .format("bigquery") \
-  .option("writeMethod", "direct") \
-  .save("wordcount_dataset.wordcount_output")
+.format("bigquery") \
+.option("temporaryGcsBucket",bucket) \
+.save("wordcount_dataset.wordcount_output")
