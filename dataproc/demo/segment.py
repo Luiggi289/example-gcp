@@ -51,4 +51,5 @@ segmentacion = tendencia_ventas.withColumn("segmento", segmento_expr)
 segmentacion.write \
 .format("bigquery") \
 .option("temporaryGcsBucket",bucket) \
+.mode("overwrite") \
 .save("datamart_ventas.bi_segmentacion")
