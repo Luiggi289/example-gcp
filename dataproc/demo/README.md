@@ -64,5 +64,5 @@ gsutil cp spark-3.5-bigquery-0.37.0.jar gs://$DEVSHELL_PROJECT_ID-dataproc-dev/s
 gcloud dataproc jobs submit pyspark \
 gs://$DEVSHELL_PROJECT_ID-dataproc-dev/segment.py \
 --cluster=cluster01 \
---region=us-central1 
+--region=us-central1 \
 --jars=gs://$DEVSHELL_PROJECT_ID-dataproc-dev/spark-3.5-bigquery-0.37.0.jar
