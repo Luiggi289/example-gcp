@@ -26,8 +26,10 @@ df = spark.read.format('bigquery') \
 print(df.columns)
 
 # Calcular la diferencia en días por cliente
+
 tendencia_ventas = df.groupBy("user_id") \
-    .agg(datediff(max("order_date"), min("order_date")).alias("dias_compra"))
+    .agg(datediff(spark_max("order_date"), spark_min("order_date")).alias("dias_compra"))
+
 
 # Calcular percentiles
 percentiles = tendencia_ventas.stat.approxQuantile("dias_compra", [0.33, 0.66], 0.01)
