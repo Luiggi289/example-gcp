@@ -26,9 +26,13 @@ gcloud dataproc clusters create cluster01 --region=us-central1 \
 --master-machine-type=n1-standard-2 \
 --initialization-actions gs://$DEVSHELL_PROJECT_ID-dataproc-dev/dataproc_init.sh
 
+
+
+
+
 #### Avanzar despues de creado el cluster
 
-gcloud storage cp main.py gs://$DEVSHELL_PROJECT_ID-dataproc-dev
+gsutil storage cp main.py gs://$DEVSHELL_PROJECT_ID-dataproc-dev
 
 #### Crear un Job y ejecutarlo
 
@@ -46,6 +50,19 @@ CREATE SCHEMA IF NOT EXISTS `premium-guide-410714.datamart_ventas`
 
 
     
-gcloud storage buckets create gs://$DEVSHELL_PROJECT_ID-dataproc-dev --location=us-central1
+gcloud storage buckets create gs://$DEVSHELL_PROJECT_ID-dataproc-tmp --location=us-central1
 
 
+gsutil cp segment.py gs://$DEVSHELL_PROJECT_ID-dataproc-dev
+
+
+curl -o spark-3.5-bigquery-0.37.0.jar https://storage.googleapis.com/spark-lib/bigquery/spark-3.5-bigquery-0.37.0.jar
+
+gsutil cp spark-3.5-bigquery-0.37.0.jar gs://$DEVSHELL_PROJECT_ID-dataproc-dev/spark-3.5-bigquery-0.37.0.jar
+
+
+gcloud dataproc jobs submit pyspark \
+gs://$DEVSHELL_PROJECT_ID-dataproc-dev/segment.py \
+--cluster=cluster01 \
+--region=us-central1 
+--jars=gs://$DEVSHELL_PROJECT_ID-dataproc-dev/spark-3.5-bigquery-0.37.0.jar

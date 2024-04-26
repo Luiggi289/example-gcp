@@ -6,9 +6,11 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession \
   .builder \
+  .config("spark.jars.packages", "com.google.cloud.spark:spark-3.5-bigquery-0.37.0") \
   .master('yarn') \
   .appName('spark-bigquery-demo') \
   .getOrCreate()
+
 
 # Use the Cloud Storage bucket for temporary BigQuery export data used
 # by the connector.
