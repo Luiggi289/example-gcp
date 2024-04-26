@@ -25,12 +25,28 @@ df = spark.read.format('bigquery') \
 
 print(df.columns)
 
+# Calcular la diferencia en días por cliente
 tendencia_ventas = df.groupBy("user_id") \
-    .agg(datediff(spark_max("order_date"), spark_min("order_date")).alias("dias_compra"))
+    .agg(datediff(max("order_date"), min("order_date")).alias("dias_compra"))
+
+# Calcular percentiles
+percentiles = tendencia_ventas.stat.approxQuantile("dias_compra", [0.33, 0.66], 0.01)
+corto, largo = percentiles
+
+# Definir segmento en base a los percentiles
+segmento_expr = expr("""
+    CASE 
+        WHEN dias_compra <= {} THEN 'Bajo'
+        WHEN dias_compra <= {} THEN 'Medio'
+        ELSE 'Alto'
+    END AS segmento
+""".format(corto, largo))
+
+# Aplicar la segmentación
+segmentacion = tendencia_ventas.withColumn("segmento", segmento_expr)
 
 
-
-tendencia_ventas.write \
+segmentacion.write \
 .format("bigquery") \
 .option("temporaryGcsBucket",bucket) \
 .save("datamart_ventas.bi_segmentacion")
