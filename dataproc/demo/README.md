@@ -39,7 +39,7 @@ gcloud dataproc clusters create cluster01 --region=us-central1 \
 
 #### Copiar el archivo con el codigo a ejecutar
 ```
-gsutil storage cp main.py gs://$DEVSHELL_PROJECT_ID-dataproc-dev
+gsutil cp main.py gs://$DEVSHELL_PROJECT_ID-dataproc-dev
 ```
 
 #### Crear un Job y ejecutarlo
