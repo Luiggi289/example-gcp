@@ -1,4 +1,5 @@
 import apache_beam as beam
+from apache_beam.options.pipeline_options import PipelineOptions
 
 # Definimos una función que duplica un número
 def duplicar_numero(numero):
@@ -8,16 +9,16 @@ def duplicar_numero(numero):
 numbers = [1, 2, 3, 4, 5]
 
 # Configuración de opciones de ejecución de Dataflow
-options = {
-    'project': 'premium-guide-410714',
-    'job_name': 'job_demo',
-    'staging_location': 'gs://premium-guide-410714-dataflow-dev',
-    'temp_location': 'gs://premium-guide-410714-dataflow-tmp-dev',
-    'runner': 'DataflowRunner',
-    'region': 'us-central1',  # Cambia por tu región
-    'max_num_workers': 2,
-    'save_main_session': True,
-}
+options = PipelineOptions(
+    project='premium-guide-410714',
+    job_name='job_demo',
+    staging_location='gs://premium-guide-410714-dataflow-dev',
+    temp_location='gs://premium-guide-410714-dataflow-tmp-dev',
+    runner='DataflowRunner',
+    region='us-central1',
+    max_num_workers=2,
+    save_main_session=True,
+)
 
 # Creamos un pipeline de Apache Beam
 with beam.Pipeline(options=options) as pipeline:
