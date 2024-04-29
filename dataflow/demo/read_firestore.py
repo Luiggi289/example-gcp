@@ -51,6 +51,7 @@ options = PipelineOptions(
     region='us-central1',
     max_num_workers=2,
     save_main_session=True,
+    extra_packages=['google-cloud-firestore==2.16.0'],
 )
 # Inicializamos el cliente de Firestore
 db = firestore.Client()
