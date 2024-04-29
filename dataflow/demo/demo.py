@@ -8,6 +8,7 @@ def duplicar_numero(numero):
 # Datos de entrada: una lista de números
 numbers = [1, 2, 3, 4, 5]
 
+gs_datalake='gs://premium-guide-410714-datalake-dev/demo/'
 # Configuración de opciones de ejecución de Dataflow
 options = PipelineOptions(
     project='premium-guide-410714',
@@ -29,4 +30,6 @@ with beam.Pipeline(options=options) as pipeline:
     numeros_duplicados = numeros | beam.Map(duplicar_numero)
 
     # Escribimos los resultados a la salida estándar
-    numeros_duplicados | beam.Map(print)
+    numeros_duplicados |  beam.io.WriteToText(gs_datalake)
+
+    
