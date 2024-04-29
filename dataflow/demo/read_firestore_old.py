@@ -1,6 +1,6 @@
 import apache_beam as beam
 from google.cloud import firestore
-from apache_beam.options.pipeline_options import PipelineOptions,GoogleCloudOptions,SetupOptions
+from apache_beam.options.pipeline_options import PipelineOptions
 import json
 
 
@@ -42,13 +42,17 @@ def obtener_datos_firestore(documento):
         yield json.dumps(datos_json) + '\n'
 
 # Configuración de opciones de Pipeline
-
-options = PipelineOptions()
-options.view_as(SetupOptions).save_main_session = True
-
-project = options.view_as(GoogleCloudOptions).project
-assert project is not None, '"project" is not specified.'
-
+options = PipelineOptions(
+    project='premium-guide-410714',
+    job_name='job-read-firestore',
+    staging_location='gs://premium-guide-410714-dataflow-dev',
+    temp_location='gs://premium-guide-410714-dataflow-tmp-dev',
+    runner='DataflowRunner',
+    region='us-central1',
+    max_num_workers=2,
+    save_main_session=True,
+    extra_packages=['google-cloud-firestore==2.16.0'],
+)
 # Inicializamos el cliente de Firestore
 db = firestore.Client()
 
