@@ -5,6 +5,8 @@
 
 #### Copiar el repositorio 
 ```
+cd
+rm -r example-gcp -f
 git clone https://github.com/Luiggi289/example-gcp.git  
 cd example-gcp/dataproc/demo
 ```

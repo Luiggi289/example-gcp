@@ -11,7 +11,7 @@ numbers = [1, 2, 3, 4, 5]
 # Configuración de opciones de ejecución de Dataflow
 options = PipelineOptions(
     project='premium-guide-410714',
-    job_name='job_demo',
+    job_name='job-demo',
     staging_location='gs://premium-guide-410714-dataflow-dev',
     temp_location='gs://premium-guide-410714-dataflow-tmp-dev',
     runner='DataflowRunner',
