@@ -67,6 +67,6 @@ gcloud dataflow jobs run job-ingesta-firestore \
     --parameters \
 firestoreReadGqlQuery="SELECT * FROM transacciones",\
 firestoreReadProjectId=premium-guide-410714,\
-textWritePrefix=gs://premium-guide-410714-dataflow-dev/firestore/transacciones
+textWritePrefix=gs://premium-guide-410714-dataflow-dev/firestore/transacciones \
 --num-workers=1
 ```
