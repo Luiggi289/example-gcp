@@ -58,7 +58,14 @@ https://cloud.google.com/dataflow/docs/guides/templates/provided-templates
 ```
 
 
-### Cargar datos desde Firestore a Cloud Storage
+### Cargar datos desde Firestore a Cloud Storage en Lote
+
+#### Ingesamos a Cloud Shell :
+```
+https://shell.cloud.google.com/
+```
+
+#### Ejecutar el siguiente comando :
 
 ```
 gcloud dataflow jobs run job-ingesta-firestore \
@@ -66,7 +73,113 @@ gcloud dataflow jobs run job-ingesta-firestore \
     --region southamerica-west1 \
     --parameters \
 firestoreReadGqlQuery="SELECT * FROM transacciones",\
-firestoreReadProjectId=premium-guide-410714,\
-textWritePrefix=gs://premium-guide-410714-dataflow-dev/firestore/transacciones \
+firestoreReadProjectId=$DEVSHELL_PROJECT_ID,\
+textWritePrefix=gs://$DEVSHELL_PROJECT_ID-datalake-dev/firestore/transacciones \
 --num-workers=1
 ```
+
+
+#### Cargar datos a bigquery en Streaming
+
+### Creamos un Tema(tópico) con el siguiente comando
+
+```
+gcloud pubsub topics create topic_card
+```
+
+### Ir a Bigquery Estudio y ejecutar el siguiente Script para crear el esquema 
+```
+CREATE SCHEMA IF NOT EXISTS `datamart_ventas`  
+
+  OPTIONS (    location = 'US'); 
+```
+
+#### Cargar datos a bigquery con Dataflow (Opcional)
+
+
+### Creamos una suscripción con el siguiente comando
+```
+gcloud pubsub subscriptions create subs_card --topic=topic_card
+```
+
+###  Creamos la tabla donde se guardarón los siguiente registros 
+### Entramos a Bigquery Studio y ejecutamos la siguiente sentencia : 
+```
+create table  datamart_ventas.stream_tarjeta_dfw
+(
+
+data string
+)
+```
+
+
+
+### Crear un Job Stream en dataflow 
+
+### Documentación 
+```
+https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-bigquery
+```
+
+### Creamos el job streaming en dataflow con los siguientes pasos :
+
+####	1.- Ir a la consola de GCP , ir al menú de navegación y seleccionar el producto Dataflow
+####	2.- Ir al sección "trabajos" y dar clic al botón  "CREAR TRABAJO A PARTIR DE UNA PLANTILLA".
+####	3.- En el campo Nombre del trabajo, ingrese un nombre de trabajo único.
+####	4.- para Punto final regional, seleccione un valor en el menú desplegable. La región predeterminada es us-central1.
+####	5.- En el menú desplegable Plantilla de flujo de datos, seleccione la plantilla Pub/Sub to BigQuery.
+####	6.- En el campo "Bigquery ouput table" ingresar el nombre de su tabla , para este ejercicio usaremos  premium-guide-410714.datamart_ventas.stream_tarjeta_dfw
+####	7.- En la lista desplegable "Input Pub/Sub Topic" seleccionamos un topico ,para este ejercicio usaramos "topic-card"
+####	8.- En la lista desplegable "Pub/Sub input subscription" seleccionamos una suscripción , para este ejercicio usaremos "subs_card"
+#### 9.- En el campo "Máx. de Trabajadores" , ingresar el valor 1
+#### 10.- Finalmente clic en "Ejecutar Trabajo"
+
+#### Probar el proceso en Streaming
+#### Ir a Cloud Shell
+#### Copiar el repositorio 
+```
+cd
+rm -r example-gcp -f
+git clone https://github.com/Luiggi289/example-gcp.git  
+cd example-gcp/dataflow/demo
+```
+
+#### Crear un entorno virtual  
+virtualenv env
+#### Activar el entorno Virtual
+source env/bin/activate
+
+
+### Cargar Datos a Bigquery solo con Pubsub
+
+
+#### Primero crearemos una tabla donde se almacenarán los mensajes de pubsub
+#### Ir a Bigquery Estudio y ejecutar el siguiente Script para crear la tabla 
+```
+CREATE TABLE
+  datamart_ventas.venta_online (
+subscription_name STRING,
+message_id STRING,
+publish_time TIMESTAMP,
+data JSON,
+attributes STRING ,
+  )
+PARTITION BY DATE(publish_time)
+OPTIONS(
+  partition_expiration_days=90
+);
+
+```
+#### Creamos una suscripción en Pubsub
+#### 1.- Vamos a pubsub y seleccionamos la sección Suscripciones
+#### 2.- Damos clic en el botón "CREAR SUSCRIPCIÓN"
+#### 3.- En ID de la suscripción ingesamos : susc_venta_enlinea
+#### 4.- Seleccionamos el tema topic-card
+#### 5.- En Tipo de Envio Seleccionamos "Escribe en Bigquery"
+#### 6.- Seleccionamos el proyecto de prueba y seleccionamos el esquema datamart_ventas
+####     (En alguno es necesario dar permisos de editor a la cuenta de servicio que usa pub/sub)
+#### 7.- Seleccionamos la tabla venta_online
+#### 8.- En Schema Option Seleccionamos "Ninguno" y marcamos la opción "Escribir Metadatos"
+#### 9.- Finalmente damos clic en el botón "CREAR"
+
+

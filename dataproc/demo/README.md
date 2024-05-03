@@ -105,7 +105,7 @@ curl -o spark-3.1-bigquery-0.37.0.jar https://storage.googleapis.com/spark-lib/b
 gsutil cp spark-3.1-bigquery-0.37.0.jar gs://$DEVSHELL_PROJECT_ID-dataproc-dev/spark-3.1-bigquery-0.37.0.jar
 ```
 
-#### Ejecutarun job de Dataproc , aquí se ejecuta mi código python 
+#### Ejecutar un job de Dataproc , aquí se ejecuta mi código python 
 ```
 gcloud dataproc jobs submit pyspark \
 gs://$DEVSHELL_PROJECT_ID-dataproc-dev/segment.py \
@@ -119,5 +119,10 @@ gs://$DEVSHELL_PROJECT_ID-dataproc-dev/segment.py \
 ```
 gcloud dataproc clusters delete cluster01 --region=us-central1
 ```
+
+
+
+
+
 
 
