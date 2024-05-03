@@ -196,3 +196,29 @@ OPTIONS(
 #### 9.- Finalmente damos clic en el botón "CREAR"
 
 
+#### Probemos ejecutando el siguiente código en cloud shell 
+```
+python pubsub_publish.py
+```
+
+#### creamos una vista que usaremos para hacer los reportes
+```
+CREATE OR REPLACE VIEW datamart_ventas.v_venta_online
+as
+SELECT
+publish_time fecha,
+1 tarjetas,
+CASE   
+      WHEN SUBSTR( STRING (JSON_EXTRACT(json_text, '$.card') ),0,1)='1' THEN 'VISA-DEBITO' 
+      WHEN SUBSTR(STRING (JSON_EXTRACT(json_text, '$.card') ),0,1) ='2' THEN 'VISA-CREDITO' 
+      WHEN SUBSTR(STRING (JSON_EXTRACT(json_text, '$.card') ),0,1) ='3' THEN 'MC-DEBITO' 
+      WHEN SUBSTR(STRING (JSON_EXTRACT(json_text, '$.card') ),0,1) ='4' THEN 'MC-CREDITO' 
+      WHEN SUBSTR(STRING (JSON_EXTRACT(json_text, '$.card') ),0,1) ='9' THEN 'MC-CREDITO' 
+      ELSE 'VIRTUAL'
+
+      END as tipo_tarjeta
+
+ FROM  premium-guide-410714.datamart_ventas.venta_online  a
+,UNNEST  ( [a.data ]) as json_text
+;
+```
