@@ -145,9 +145,17 @@ cd example-gcp/dataflow/demo
 ```
 
 #### Crear un entorno virtual  
+```
 virtualenv env
+```
 #### Activar el entorno Virtual
+```
 source env/bin/activate
+```
+#### Ejecutar Código python donde se hace la publicacón de mensajes :
+```
+python pubsub_publish.py
+```
 
 
 ### Cargar Datos a Bigquery solo con Pubsub
