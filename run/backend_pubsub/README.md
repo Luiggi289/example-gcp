@@ -1,8 +1,3 @@
-#### Abrir Cloud Shell
-
-```
-gcloud services enable dataflow.googleapis.com
-```
 
 
 #### Copiar el repositorio 

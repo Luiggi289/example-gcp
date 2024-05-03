@@ -72,6 +72,9 @@ def create_delivered():
 
 
     ### Para Pubsub
+    fecha_actual_peru_str = fecha_actual_peru.strftime("%Y-%m-%d")
+    datos["created_datetime"] = fecha_actual_peru_str
+    
     publish_message("premium-guide-410714", "topic_card", datos)
 
 
