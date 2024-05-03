@@ -5,7 +5,7 @@ import pytz
 import os
 from flask_cors import CORS
 from google.cloud import pubsub_v1 ### Para Pubsub
-
+import json ### Para Pubsub
 
 URL_FRONTEND = os.environ.get('URL_FRONTEND')
 
