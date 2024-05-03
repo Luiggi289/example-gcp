@@ -1,5 +1,5 @@
 
-### DataFlow
+### 1.- Intudcción DataFlow
 
 
 #### Abrir Cloud Shell
@@ -50,7 +50,7 @@ gcloud storage buckets create gs://$DEVSHELL_PROJECT_ID-datalake-dev --location=
 python demo.py
 
 
-### Plantillas de Dataflow 
+### 2.- Plantillas de Dataflow 
 
 #### Revisa la documentación en : 
 ```
@@ -79,7 +79,7 @@ textWritePrefix=gs://$DEVSHELL_PROJECT_ID-datalake-dev/firestore/transacciones \
 ```
 
 
-#### Cargar datos a bigquery en Streaming
+#### 3.- Cargar datos a bigquery en Streaming
 
 ### Creamos un Tema(tópico) con el siguiente comando
 
@@ -94,7 +94,7 @@ CREATE SCHEMA IF NOT EXISTS `datamart_ventas`
   OPTIONS (    location = 'US'); 
 ```
 
-#### Cargar datos a bigquery con Dataflow (Opcional)
+####  3.1 Cargar datos a bigquery con Dataflow (Opcional)
 
 
 ### Creamos una suscripción con el siguiente comando
@@ -135,6 +135,7 @@ https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-bigqu
 #### 10.- Finalmente clic en "Ejecutar Trabajo"
 
 #### Probar el proceso en Streaming
+
 #### Ir a Cloud Shell
 #### Copiar el repositorio 
 ```
@@ -152,13 +153,17 @@ virtualenv env
 ```
 source env/bin/activate
 ```
+#### Instalar las librerias 
+```
+pip install -r requirements.txt
+```
 #### Ejecutar Código python donde se hace la publicacón de mensajes :
 ```
 python pubsub_publish.py
 ```
 
 
-### Cargar Datos a Bigquery solo con Pubsub
+### 3.2.- Cargar Datos a Bigquery solo con Pubsub
 
 
 #### Primero crearemos una tabla donde se almacenarán los mensajes de pubsub
