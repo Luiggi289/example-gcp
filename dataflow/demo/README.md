@@ -132,7 +132,7 @@ https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-bigqu
 
 ####	1.- Ir a la consola de GCP , ir al menú de navegación y seleccionar el producto Dataflow
 ####	2.- Ir al sección "trabajos" y dar clic al botón  "CREAR TRABAJO A PARTIR DE UNA PLANTILLA".
-####	3.- En el campo Nombre del trabajo, ingrese un nombre de trabajo único.
+####	3.- En el campo Nombre del trabajo, ingrese un nombre de trabajo único : job-stream-bq.
 ####	4.- para Punto final regional, seleccione un valor en el menú desplegable. La región predeterminada es us-central1.
 ####	5.- En el menú desplegable Plantilla de flujo de datos, seleccione la plantilla Pub/Sub Subscription to BigQuery.
 ####	6.- En el campo "Bigquery ouput table" ingresar el nombre de su tabla , para este ejercicio usaremos  premium-guide-410714.datamart_ventas.stream_tarjeta_dfw
@@ -143,6 +143,9 @@ PROJECT_ID-dataflow-tmp-dev/tmp
 ```
 #### 9.- En el campo "Máx. de Trabajadores" , ingresar el valor 1
 #### 10.- Finalmente clic en "Ejecutar Trabajo"
+
+
+
 
 #### Probar el proceso en Streaming
 
@@ -171,6 +174,13 @@ pip install -r requirements.txt
 ```
 python pubsub_publish.py
 ```
+
+
+### 3.3 Cancelar el Job de Dataflow
+#### Para evitar costos por el job tipo Streaming , debemos cancelar el Job 
+#### 1.- Ir a Dataflow en la sección de trabajos
+#### 2.- Seleccionar el job en ejecución :  job-stream-bq 
+#### 3.- Dar clic en el botón "DETENER"
 
 
 ### 3.2.- Cargar Datos a Bigquery solo con Pubsub
