@@ -32,7 +32,7 @@ def hello_gcs(cloud_event: CloudEvent) -> tuple:
     df = pd.read_csv(f"gs://{bucket}/{name}")
 
     # Escribir el DataFrame en BigQuery
-    df.to_gbq("datamart_ventas.metas", project_id="premium-guide-410714", if_exists="replace")
+    df.to_gbq("raw_ventas.metas", project_id="premium-guide-410714", if_exists="replace")
 
     print(f"Archivo se ha cargado exitosamente a BigQuery.")
 

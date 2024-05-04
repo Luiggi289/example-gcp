@@ -105,10 +105,17 @@ gcloud pubsub subscriptions create subs_card --topic=topic_card
 ###  Creamos la tabla donde se guardarón los siguiente registros 
 ### Entramos a Bigquery Studio y ejecutamos la siguiente sentencia : 
 ```
-create table  datamart_ventas.stream_tarjeta_dfw
+create or replace table  datamart_ventas.stream_tarjeta_dfw
 (
 
-data string
+name string,
+email string ,
+document string ,
+comments string,
+card string ,
+created_datetime string 
+
+
 )
 ```
 
@@ -127,10 +134,13 @@ https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-bigqu
 ####	2.- Ir al sección "trabajos" y dar clic al botón  "CREAR TRABAJO A PARTIR DE UNA PLANTILLA".
 ####	3.- En el campo Nombre del trabajo, ingrese un nombre de trabajo único.
 ####	4.- para Punto final regional, seleccione un valor en el menú desplegable. La región predeterminada es us-central1.
-####	5.- En el menú desplegable Plantilla de flujo de datos, seleccione la plantilla Pub/Sub to BigQuery.
+####	5.- En el menú desplegable Plantilla de flujo de datos, seleccione la plantilla Pub/Sub Subscription to BigQuery.
 ####	6.- En el campo "Bigquery ouput table" ingresar el nombre de su tabla , para este ejercicio usaremos  premium-guide-410714.datamart_ventas.stream_tarjeta_dfw
-####	7.- En la lista desplegable "Input Pub/Sub Topic" seleccionamos un topico ,para este ejercicio usaramos "topic-card"
-####	8.- En la lista desplegable "Pub/Sub input subscription" seleccionamos una suscripción , para este ejercicio usaremos "subs_card"
+####	7.- En la lista desplegable "Pub/Sub input subscription" seleccionamos una suscripción , para este ejercicio usaremos "subs_card"
+#### 8.- En el campo Ubicación Temporal ingresamos el valor : 
+```
+PROJECT_ID-dataflow-tmp-dev/tmp
+```
 #### 9.- En el campo "Máx. de Trabajadores" , ingresar el valor 1
 #### 10.- Finalmente clic en "Ejecutar Trabajo"
 
