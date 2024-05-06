@@ -6,10 +6,9 @@
 #### contiene los pasos que se ejecutarán en secuencia cuando se inicie el flujo de trabajo :
 
 #### Sintaxis :
-#### <span style="color:red">[MAP_NAME] </span> 
 ```
   main:
-      params: <span style="color:red">[MAP_NAME]</span> 
+      params: **[MAP_NAME]**
       steps:
           - STEP_NAME:
 ```
