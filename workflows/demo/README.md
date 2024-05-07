@@ -99,6 +99,18 @@ http.request
 ```
 gcloud services enable workflows.googleapis.com
 ```
+#### 1.1 Clonar repositorio
+```
+cd
+rm -r example-gcp -f
+git clone https://github.com/Luiggi289/example-gcp.git  
+cd example-gcp/workflows/demo
+```
+#### 1.2 Copiar archivo
+```
+gsutil cp tipo_cambio.csv gs://premium-guide-410714-datalake-dev/sunat/tipo_cambio.csv
+```
+
 
 #### 2.- crear dataset donde se guardaran los datos  
 #### 2.1.- Ir a Bigquery y ejecutar el siguientes script :
