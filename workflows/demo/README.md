@@ -121,7 +121,7 @@ CREATE SCHEMA IF NOT EXISTS `[project_id].raw_taller_ventas`
   OPTIONS (    location = 'US');
 
 
-CREATE OR REPLACE TABLE `dev-intercorp-data-operation.raw_taller_ventas.tipo_cambio` 
+CREATE OR REPLACE TABLE `[project_id].raw_taller_ventas.bi_sales_store` 
 (
   SALES_DATE DATE,
   STORE_SKID INT64,
@@ -142,6 +142,35 @@ FROM FILES (
   uris = ['gs://premium-guide-410714-datalake-dev/sunat/tipo_cambio.csv']);
 END 
 ;
+
+
+
+```
+
+```
+CREATE OR REPLACE PROCEDURE `[project_id].raw_taller_ventas.sp_load_bi_sales_store`()
+BEGIN
+
+
+DELETE FROM `[project_id].raw_taller_ventas.bi_sales_store` WHERE SALES_DATE='2018-01-01' ;
+
+INSERT INTO `[project_id].raw_taller_ventas.bi_sales_store`  
+(
+  SALES_DATE ,
+  STORE_SKID ,
+  POS_COST_AMT  
+)
+
+select SALES_DATE,STORE_SKID, sum(POS_COST_AMT) POS_COST_AMT
+from `data-to-insights.AJ_Retail_Partitioned.POSDS_WKLY_FCT`
+where SALES_DATE='2018-01-01'
+group by 1,2
+;
+
+END 
+;
+
+
 ```
 
 
