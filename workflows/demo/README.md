@@ -132,6 +132,10 @@ FROM FILES (
 END 
 ;
 ```
+#### 2.3 Brindar los siguientes accesos
+####   Acceso de Bigquery Data Editor en el dataset en el dataset  [project_id].raw_taller_ventas
+####   Visualizador de objetos de Storage en el bucket donde está el archivo tipo_cambio.csv
+####   Usuario de trabajo de Bigquery en el Proyecto
 
 #### 3.- Ir a la consola de GCP y buscar el producto workflows
 #### 4.- Clic en el botón Crear 
