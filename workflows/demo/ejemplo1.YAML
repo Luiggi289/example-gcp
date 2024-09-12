@@ -7,12 +7,12 @@ main:
     steps:
     - InitVariables:
         assign:
-            - bq_project_id: premium-guide-410714
+            - bq_project_id: [project_id]
 
     - load_bq_raw_tipo_cambio:
         call: SyncBigQueryJob
         args:
-            query: "CALL `raw_taller_ventas.sp_load_exchange_rate`()"
+            query: ${"CALL `"+bq_project_id+".raw_taller_ventas.sp_load_exchange_rate`()"}
             project_id: ${bq_project_id}
         result: queryResult
 
