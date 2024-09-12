@@ -160,7 +160,7 @@ main:
         call: googleapis.bigquery.v2.jobs.query
         args:
           body:
-            query: "CALL `raw_taller_ventas.sp_load_exchange_rate`()"
+            query: ${"CALL `"+bq_project_id+".raw_taller_ventas.sp_load_exchange_rate`()"}
             useLegacySql: false
           projectId: ${bq_project_id}
         result: queryResult
