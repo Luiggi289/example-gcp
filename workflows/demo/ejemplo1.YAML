@@ -12,7 +12,7 @@ main:
     - load_bq_raw_tipo_cambio:
         call: SyncBigQueryJob
         args:
-            query: "CALL `raw_ventas.sp_load_ba_itc_audience_contact`()"
+            query: "CALL `raw_ventas.sp_load_exchange_rate`()"
             project_id: ${bq_project_id}
         result: queryResult
 
