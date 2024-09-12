@@ -116,13 +116,13 @@ gsutil cp tipo_cambio.csv gs://premium-guide-410714-datalake-dev/sunat/tipo_camb
 #### 2.1.- Ir a Bigquery y ejecutar el siguientes script :
 
 ```
-CREATE SCHEMA IF NOT EXISTS `raw_ventas`  
+CREATE SCHEMA IF NOT EXISTS `raw_taller_ventas`  
 
   OPTIONS (    location = 'US'); 
 ```
 #### 2.2 Crear el procedure de carga en Bigquery
 ```
-CREATE OR REPLACE PROCEDURE `raw_ventas.sp_load_exchange_rate`()
+CREATE OR REPLACE PROCEDURE `raw_taller_ventas.sp_load_exchange_rate`()
 BEGIN
 
 LOAD DATA OVERWRITE   `raw_ventas.tipo_cambio` 
@@ -159,7 +159,7 @@ main:
         call: googleapis.bigquery.v2.jobs.query
         args:
           body:
-            query: "CALL `raw_ventas.sp_load_exchange_rate`()"
+            query: "CALL `raw_taller_ventas.sp_load_exchange_rate`()"
             useLegacySql: false
           projectId: ${bq_project_id}
         result: queryResult
