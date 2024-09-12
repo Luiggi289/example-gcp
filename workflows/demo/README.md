@@ -122,7 +122,7 @@ CREATE SCHEMA IF NOT EXISTS `raw_ventas`
 ```
 #### 2.2 Crear el procedure de carga en Bigquery
 ```
-CREATE OR REPLACE PROCEDURE `raw_ventas.sp_load_ba_itc_audience_contact`()
+CREATE OR REPLACE PROCEDURE `raw_ventas.sp_load_exchange_rate`()
 BEGIN
 
 LOAD DATA OVERWRITE   `raw_ventas.tipo_cambio` 
@@ -159,7 +159,7 @@ main:
         call: googleapis.bigquery.v2.jobs.query
         args:
           body:
-            query: "CALL `raw_ventas.sp_load_ba_itc_audience_contact`()"
+            query: "CALL `raw_ventas.sp_load_exchange_rate`()"
             useLegacySql: false
           projectId: ${bq_project_id}
         result: queryResult
