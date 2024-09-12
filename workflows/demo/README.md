@@ -116,16 +116,16 @@ gsutil cp tipo_cambio.csv gs://premium-guide-410714-datalake-dev/sunat/tipo_camb
 #### 2.1.- Ir a Bigquery y ejecutar el siguientes script :
 
 ```
-CREATE SCHEMA IF NOT EXISTS `raw_taller_ventas`  
+CREATE SCHEMA IF NOT EXISTS `[project_id].raw_taller_ventas`  
 
   OPTIONS (    location = 'US'); 
 ```
 #### 2.2 Crear el procedure de carga en Bigquery
 ```
-CREATE OR REPLACE PROCEDURE `raw_taller_ventas.sp_load_exchange_rate`()
+CREATE OR REPLACE PROCEDURE `[project_id].raw_taller_ventas.sp_load_exchange_rate`()
 BEGIN
 
-LOAD DATA OVERWRITE   `raw_ventas.tipo_cambio` 
+LOAD DATA OVERWRITE   `[project_id].raw_taller_ventas.tipo_cambio` 
 FROM FILES (
   format = 'CSV',
   uris = ['gs://premium-guide-410714-datalake-dev/sunat/tipo_cambio.csv']);
