@@ -148,13 +148,18 @@ END
 ```
 
 ```
-CREATE OR REPLACE PROCEDURE `[project_id].raw_taller_ventas.sp_load_bi_sales_store`()
+CREATE OR REPLACE PROCEDURE `dev-intercorp-data-operation.raw_taller_ventas.sp_load_bi_sales_store`(
+  p_date STRING
+)
 BEGIN
 
+DECLARE v_date DATE;
 
-DELETE FROM `[project_id].raw_taller_ventas.bi_sales_store` WHERE SALES_DATE='2018-01-01' ;
+SET v_date=cast(p_date as date);
 
-INSERT INTO `[project_id].raw_taller_ventas.bi_sales_store`  
+DELETE FROM `dev-intercorp-data-operation.raw_taller_ventas.bi_sales_store` WHERE SALES_DATE=v_date ;
+
+INSERT INTO `dev-intercorp-data-operation.raw_taller_ventas.bi_sales_store`  
 (
   SALES_DATE ,
   STORE_SKID ,
@@ -163,7 +168,7 @@ INSERT INTO `[project_id].raw_taller_ventas.bi_sales_store`
 
 select SALES_DATE,STORE_SKID, sum(POS_COST_AMT) POS_COST_AMT
 from `data-to-insights.AJ_Retail_Partitioned.POSDS_WKLY_FCT`
-where SALES_DATE='2018-01-01'
+where SALES_DATE=v_date
 group by 1,2
 ;
 
