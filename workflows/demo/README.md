@@ -148,7 +148,7 @@ END
 ```
 
 ```
-CREATE OR REPLACE PROCEDURE `dev-intercorp-data-operation.raw_taller_ventas.sp_load_bi_sales_store`(
+CREATE OR REPLACE PROCEDURE `[project_id].raw_taller_ventas.sp_load_bi_sales_store`(
   p_date STRING
 )
 BEGIN
@@ -157,9 +157,9 @@ DECLARE v_date DATE;
 
 SET v_date=cast(p_date as date);
 
-DELETE FROM `dev-intercorp-data-operation.raw_taller_ventas.bi_sales_store` WHERE SALES_DATE=v_date ;
+DELETE FROM `[project_id].raw_taller_ventas.bi_sales_store` WHERE SALES_DATE=v_date ;
 
-INSERT INTO `dev-intercorp-data-operation.raw_taller_ventas.bi_sales_store`  
+INSERT INTO `[project_id].raw_taller_ventas.bi_sales_store`  
 (
   SALES_DATE ,
   STORE_SKID ,
