@@ -118,7 +118,18 @@ gsutil cp tipo_cambio.csv gs://premium-guide-410714-datalake-dev/sunat/tipo_camb
 ```
 CREATE SCHEMA IF NOT EXISTS `[project_id].raw_taller_ventas`  
 
-  OPTIONS (    location = 'US'); 
+  OPTIONS (    location = 'US');
+
+
+CREATE OR REPLACE TABLE `dev-intercorp-data-operation.raw_taller_ventas.tipo_cambio` 
+(
+  SALES_DATE DATE,
+  STORE_SKID INT64,
+  POS_COST_AMT FLOAT64
+)
+PARTITION BY SALES_DATE
+;
+
 ```
 #### 2.2 Crear el procedure de carga en Bigquery
 ```
